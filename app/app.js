@@ -15,6 +15,9 @@ app.set('view engine', "ejs"); // html소스 해석엔진
 // 라우팅
 app.use("/", home); // middleware를 등록하는 메소드 use
 
+//
+app.use(express.static(`${__dirname}/src/public`));
+
 module.exports = app;
 
 
