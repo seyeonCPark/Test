@@ -21,7 +21,9 @@ function login() {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify(req)
-    });
+    })
+        .then((res) => res.json())
+        .then(console.log);// server의 응답데이터는 promise 형태이고, 이를 받기 위해 then(), 읽기 위해 json() 메소드를 사용한다 !
 }
 
 
