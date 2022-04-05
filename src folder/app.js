@@ -1,6 +1,6 @@
 "use strict"
 
-// modules
+// modules 
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -16,6 +16,8 @@ app.set('view engine', "ejs"); // html소스 해석엔진
 app.use("/", home); // middleware를 등록하는 메소드 use
 
 module.exports = app;
+
+
 /* 
 const http = require("http");
 
