@@ -19,13 +19,13 @@ const output = {
 const process = {
 
     // login.js로부터의 req
-    login : (req, res) => {
+    login : async (req, res) => {
         
         const body = req.body;
 
         // data를 저장하고 있는 class는 instance화 할 필요 없음. 클래스 자체로 접근(클래스안에서 정적변수로 선언된 아이에겐 그냥 접근 가능)
         const user = new User(body);
-        const response = user.login();
+        const response = await user.login();
         
         return res.json(response);
     },
