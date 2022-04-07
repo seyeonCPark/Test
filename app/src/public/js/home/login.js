@@ -24,7 +24,7 @@ function login() {
     })
         .then((res) => res.json()) // server의 응답데이터는 promise 형태이고, 이를 받기 위해 then(), 읽기 위해 json() 메소드를 사용한다 !
         // .then(console.log);
-        .then((res) => {
+        .then((res) => { 
             
             if(res.success){
                 location.href = "/";

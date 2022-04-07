@@ -1,9 +1,6 @@
 "use strict"
 
-const users = {
-    id : ["aaa", "bbb", "ccc"],
-    password : ["111", "111", "222"]
-};
+const userStorage = require("../../models/UserStorage");
 
 const output = {
 
@@ -18,10 +15,15 @@ const output = {
 const process = {
 
     login : (req, res) => {
+        
+        // data를 저장하고 있는 class는 instance화 할 필요 없음. 클래스 자체로 접근(클래스안에서 정적변수로 선언된 아이에겐 그냥 접근 가능)
+        const users = userStorage.getUsers("id","password"); // 가변길이 파라미터를 받는 메소드.
 
         // 사용자 입력데이터
         const id = req.body.id,
-            password = req.body.password
+            password = req.body.password;
+
+        const responseData = {};
         
         // db데이터
         if(users.id.includes(id)){
@@ -31,17 +33,14 @@ const process = {
             
             // 비밀번호도 비교
             if(users.password[idxOfId] === password){
-
-                return res.json({
-                    success : true
-                });
+                responseData.success = true;
+                return res.json(responseData);
             }
         }
-
-        return res.json({
-            success : false,
-            msg : "로그인에 실패하였습니다."
-        });
+        
+        responseData.success = false;
+        responseData.msg = "로그인에 실패하였습니다.";
+        return res.json(responseData);
     }
 };
 
