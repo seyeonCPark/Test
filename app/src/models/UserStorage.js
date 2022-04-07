@@ -27,6 +27,23 @@ class UserStorage {
         
         return newUsers;
     }
+
+    // 입력된 id의 비밀번호, 이름 등 모든 정보를 json객체로 리턴
+    static getUserInfo(id) {
+
+        const users = this.#users;
+        const idx = users.id.indexOf(id);
+
+        // if(idx != -1){
+            const userKeys = Object.keys(users);
+            const userInfo = userKeys.reduce((newUser, info) => {
+
+                newUser[info] = users[info][idx];
+                return newUser;
+            },{});
+        // }
+        return userInfo;
+    }
 }
 
 module.exports = UserStorage;
