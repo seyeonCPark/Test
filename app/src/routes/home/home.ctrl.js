@@ -23,7 +23,6 @@ const process = {
         
         const body = req.body;
 
-        // data를 저장하고 있는 class는 instance화 할 필요 없음. 클래스 자체로 접근(클래스안에서 정적변수로 선언된 아이에겐 그냥 접근 가능)
         const user = new User(body);
         const response = await user.login();
         
@@ -31,12 +30,12 @@ const process = {
     },
     
     // register.js로부터의 req
-    register : (req, res) => {
+    register : async (req, res) => {
 
         const body = req.body;
 
         const user = new User(body);
-        const response = user.register();
+        const response = await user.register();
 
         return res.json(response);
     }

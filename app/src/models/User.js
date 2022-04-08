@@ -16,24 +16,28 @@ class User {
         const client = this.body;
 
         // promise의 상태가 pending 중일 때 실행되지 않도록 await를 사용
-        const {id, password} = await UserStorage.getUserInfo(client.id);
+        const {id, password} = await UserStorage.getUserInfo(client.id); // promise를 리턴하는 함수 앞에서만 await를 붙일 수 있고, async함수안에서만 사용 가능.
 
-        // if(id){
-        //     if(id === client.id && password == client.password){
-        //         return {success : true};
-        //     } else {
-        //         return {success : false, msg : "비밀번호가 틀렸습니다."};
-        //     }
-        // }
-        // return {success : false, msg : "존재하지 않는 아이디입니다."};
+        if(id){
+            if(id === client.id && password == client.password){
+                return {success : true};
+            } else {
+                return {success : false, msg : "비밀번호가 틀렸습니다."};
+            }
+        }
+        return {success : false, msg : "존재하지 않는 아이디입니다."};
     }
 
-    register() {
+    async register() {
 
         const client = this.body;
-        const response = UserStorage.save(client);
-        return response;
 
+        try {
+            const response = await UserStorage.save(client); // storage에 저장하는 데 시간이 좀 걸리므로 await
+            return response;
+        } catch(err){
+            return {success : false, msg : err};
+        }
     }
 }
 

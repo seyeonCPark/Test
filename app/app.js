@@ -3,7 +3,6 @@
 // modules
 const express = require('express');
 const app = express();
-// const PORT = 3000;
 
 // routing
 const home = require('./src/routes/home');
