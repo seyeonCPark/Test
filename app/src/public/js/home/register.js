@@ -8,7 +8,6 @@ const id = document.querySelector("#id"),
 
 registerBtn.addEventListener("click", register);
 
-// ecma 화살표 사용시 절차적으로 읽어 해당 register 함수의 존재를 모르겠다고 함
 function register() {
 
     // 검증
@@ -31,6 +30,7 @@ function register() {
         .then((res) => res.json())
         .then((res) => { 
             
+            // console.log(res)
             if(res.success){
                 location.href = "/login";
             } else {

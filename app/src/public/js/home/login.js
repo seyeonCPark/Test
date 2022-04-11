@@ -7,7 +7,6 @@ const id = document.querySelector("#id"),
 
 loginBtn.addEventListener("click", login);
 
-// ecma 화살표 사용시 절차적으로 읽어 해당 login 함수의 존재를 모르겠다고 함
 function login() {
 
     const req = {
@@ -22,8 +21,7 @@ function login() {
         },
         body : JSON.stringify(req)
     })
-        .then((res) => res.json()) // server의 응답데이터는 promise 형태이고, 이를 받기 위해 then(), 읽기 위해 json() 메소드를 사용한다 !
-        // .then(console.log);
+        .then((res) => res.json())
         .then((res) => { 
             
             if(res.success){

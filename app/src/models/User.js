@@ -8,27 +8,42 @@ class User {
         this.body = body;
     }
 
-    login() {
+    async login() {
         
         const client = this.body;
-        const { id, password } = UserStorage.getUserInfo(client.id);
 
-        if(id){
-            if(id === client.id && password == client.password){
-                return {success : true};
-            } else {
-                return {success : false, msg : "비밀번호가 틀렸습니다."};
+        // promise의 상태가 pending 중일 때 실행되지 않도록 await를 사용
+        const user = await UserStorage.getUserInfo(client.id);
+        
+        try {
+
+            if(user){
+
+                if(user.id){
+                    if(user.id === client.id && user.password == client.password){
+                        return {success : true};
+                    } else {
+                        return {success : false, msg : "비밀번호가 틀렸습니다."};
+                    }
+                }
+                return {success : false, msg : "존재하지 않는 아이디입니다."};
             }
+
+        } catch (err){
+            return {success : false, msg : err};
         }
-        return {success : false, msg : "존재하지 않는 아이디입니다."};
     }
 
-    register() {
+    async register() {
 
         const client = this.body;
-        const response = UserStorage.save(client);
-        return response;
-
+        
+        try{
+            const response = await UserStorage.save(client);
+            return response;
+        } catch (err) {
+            return {success : false, msg : err}
+        }
     }
 }
 
