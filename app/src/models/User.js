@@ -13,9 +13,9 @@ class User {
         const client = this.body;
 
         // promise의 상태가 pending 중일 때 실행되지 않도록 await를 사용
-        const user = await UserStorage.getUserInfo(client.id);
-        
         try {
+            
+            const user = await UserStorage.getUserInfo(client.id);
 
             if(user){
 
