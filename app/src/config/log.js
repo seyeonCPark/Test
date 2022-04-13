@@ -1,5 +1,6 @@
+'use strict'
+
 const fs = require('fs');
-const path = require('path');
 const appRoot = require('app-root-path');
 
 const accessLogStream = fs.createWriteStream(
